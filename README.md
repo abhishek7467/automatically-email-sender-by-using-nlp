@@ -36,8 +36,9 @@ Before you begin, ensure you have the following:
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
-cd email_automation_workflow
+git clone git@github.com:abhishek7467/automatically-email-sender-by-using-nlp.git
+cd automatically-email-sender-by-using-nlp
+
 ```
 
 ### 2. Create Virtual Environment
