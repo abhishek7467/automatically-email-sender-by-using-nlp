@@ -31,6 +31,11 @@ Before you begin, ensure you have the following:
 - Pinecone account
 - Git installed on your system
 
+## Automation Workflow
+<img width="421" height="684" alt="image" src="https://github.com/user-attachments/assets/541745d8-7e8c-4e0b-a0d1-c8d1ae69b05f" />
+
+
+
 ## 📦 Installation
 
 ### 1. Clone the Repository
