@@ -27,7 +27,7 @@ Before you begin, ensure you have the following:
 
 - Python 3.8 or higher
 - Google Account (personal or Google Workspace)
-- Google Cloud Platform account with billing enabled
+- Google Cloud Platform account 
 - Pinecone account
 - Git installed on your system
 
