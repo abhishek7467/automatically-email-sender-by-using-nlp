@@ -1,0 +1,12 @@
+langgraph
+google-auth 
+google-auth-oauthlib 
+google-auth-httplib2 
+google-api-python-client
+langchain
+langchain-community
+matplotlib
+scikit-learn
+langchain-google-genai
+pinecone
+pinecone[asyncio,grpc]

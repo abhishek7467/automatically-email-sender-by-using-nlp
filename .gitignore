@@ -1,0 +1,11 @@
+.env
+./google_creds/token.json
+./google_creds/email_send_client_secret_417557973889-9ts8k5ss5018i85lko8t3c3j9f24th4a.apps.googleusercontent.com.json
+./google_creds/new_token.json
+./google_creds/token.json
+./google_creds/service_account.json
+./google_creds/gen-lang-client-0288089509-3b9278a23b50.json
+google_creds/
+token_generate.py
+*.json
+
