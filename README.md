@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 📧 Email Automation Workflow By Using the Langgraph, Google Gemini, Pinecone vector db
 
 An intelligent email automation system that leverages AI to process emails, generate responses, and manage workflows using Google APIs, Pinecone vector database, and Google Gemini AI.
@@ -326,3 +327,7 @@ If you encounter issues:
 **📧 Happy Emailing!** 🚀
 
 For detailed setup instructions and API configurations, please refer to [`info.md`](./info.md).
+=======
+# automatically-email-sender-by-using-nlp
+A fully functional Gmail automation system using RAG (Pinecone + Gemini) to fetch contextual data, generate structured email drafts, and send them automatically. Includes Google API setup (Gmail/Docs), Pinecone vector DB integration, and an end-to-end workflow for smart email handling.
+>>>>>>> 1ef583fa9cf83d7453f34c3f7a069b1b60a12eee
