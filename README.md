@@ -122,27 +122,7 @@ Run the verification scripts mentioned in [`info.md`](./info.md) to ensure all s
 
 ## 🎯 How to Run
 
-### Method 1: Run the Main Script
-```bash
-python main.py
-```
-
-### Method 2: Run with Options
-```bash
-# Test mode without sending emails
-python main.py --dry-run
-
-# Process only specific number of emails
-python main.py --limit 10
-
-# Process emails from specific sender
-python main.py --sender specific@email.com
-
-# Show help
-python main.py --help
-```
-
-### Method 3: Step-by-Step Process
+### Step-by-Step Process
 
 1. **First, generate authentication token:**
    ```bash
@@ -150,9 +130,22 @@ python main.py --help
    ```
 
 2. **Run the email automation workflow:**
-   ```bash
-   python main.py
-   ```
+   
+
+### Method 2: Run with Options
+```bash
+
+# create the context and vector store for the gen ai to retrival information
+# Data store mode
+python main.py --option data_store
+
+
+# Chat mode with query
+python main.py --option chat --query "send a email to abhishek kumar for asking about the leave for tommorow sept 16 due to some urgent work."
+
+
+```
+
 
 3. **Monitor the process:**
    - Check console output for processing status
