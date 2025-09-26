@@ -6,7 +6,6 @@ def run_app(option: str, query: str):
     try:
         app = main_graph()
         print("✅ App compiled successfully")
-
         result = app.invoke({"option": option, "query": query})
         print("🎯 Final result:", result)
     except Exception as e:
@@ -28,7 +27,7 @@ if __name__ == "__main__":
 
 
 # # Chat mode with query
-# python main.py --option chat --query "send a email to abhishek kumar for requesting about my laptop is not working i need help of IT team."
+# python3 main.py --option chat --query "send a email to abhishek orange for requesting about my laptop is not working i need help of IT team."
 
 # # Data store mode
 # python main.py --option data_store

@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 pc = Pinecone()
-def select_or_create_index1(state: GmailAutomateState):
+def select_or_create_index1(state: GmailAutomateState)->GmailAutomateState:
     indexes = pc.list_indexes()
     existing_index_names = [idx['name'] for idx in indexes]
 
@@ -29,16 +29,7 @@ def select_or_create_index1(state: GmailAutomateState):
                 print(f"ℹ️ Index '{new_index_name}' already exists. Selecting it instead of creating a new one.")
                 state.index_name = new_index_name
             else:
-                # from pinecone.models import PodSpec
-                # pc.create_index(
-                #     name=new_index_name,
-                #     dimension=3072,
-                #     metric="cosine",
-                #     spec = PodSpec(
-                #                     pod_type="p1",                
-                #                     environment="us-east1-aws"   
-                #                 )
-                #                 )
+         
                 from pinecone.models import ServerlessSpec
                 pc.create_index(
                     name=new_index_name,
@@ -73,7 +64,7 @@ def select_or_create_index1(state: GmailAutomateState):
     state.nameSpaces = ns_input.strip() if ns_input.strip() else nameSpace
     return state
 
-def manage_index_data(state: GmailAutomateState):
+def manage_index_data(state: GmailAutomateState) -> GmailAutomateState:
     index = pc.Index(state.index_name)
     if getattr(state, "new_index_auto_filled", False):
         print("🎉 Setup complete! Document data is already stored in your new index.")
@@ -154,7 +145,7 @@ def manage_index_data(state: GmailAutomateState):
     return state
 
 
-def embed_and_upsert(state: GmailAutomateState):
+def embed_and_upsert(state: GmailAutomateState)->GmailAutomateState:
     text_list = [t.strip() for t in state.doc_text if t.strip()]
     if not text_list:
         return state
@@ -174,7 +165,7 @@ def embed_and_upsert(state: GmailAutomateState):
         print("✅ upsert with namespace as a parameter")
         state.index.upsert(vectors=[vector_dict], namespace=state.nameSpaces)
     return state
-def select_or_create_index(state: GmailAutomateState):
+def select_or_create_index(state: GmailAutomateState) -> GmailAutomateState:
     indexes = pc.list_indexes()
     existing_index_names = [idx['name'] for idx in indexes]
 

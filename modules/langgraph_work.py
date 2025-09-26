@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-def google_doc_loader_node(state: GmailAutomateState):
+def google_doc_loader_node(state: GmailAutomateState) -> GmailAutomateState:
     state.doc_text = load_google_doc_text(os.getenv("DOC_ID"), os.getenv("SERVICE_ACCOUNT_FILE"))
     return state
 

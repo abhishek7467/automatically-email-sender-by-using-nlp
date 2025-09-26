@@ -5,6 +5,7 @@ from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 SCOPES = [
@@ -39,13 +40,13 @@ def get_gmail_service():
             token.write(creds.to_json())
 
     return build("gmail", "v1", credentials=creds)
-
-def mail_node(state) -> dict:
-    parsed_output = state.model_dump()
-    to_list = parsed_output.get("email_to", [])
-    cc_list = parsed_output.get("email_cc", [])
-    subject = parsed_output.get("email_subject", "No Subject")
-    body = parsed_output.get("email_body", "")
+import traceback
+def mail_node(dictOutput) -> dict:
+    # parsed_output = state.model_dump()
+    to_list = dictOutput.get("email_to", [])
+    cc_list = dictOutput.get("email_cc", [])
+    subject = dictOutput.get("email_subject", "No Subject")
+    body = dictOutput.get("email_body", "")
 
     if not to_list:
         return {"status": "error", "message": "No recipients found for email."}

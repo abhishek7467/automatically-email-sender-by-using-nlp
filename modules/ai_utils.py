@@ -59,7 +59,7 @@ Best regards,\n Abhishek Kumar\n
     partial_variables={"format_instructions": email_parser.get_format_instructions()},
 )
 
-def chat_node(state: "GmailAutomateState") -> Dict:
+def chat_node(state: "GmailAutomateState") :
     """
     Chat node: performs RAG query on Pinecone, then generates structured email response.
     """
@@ -84,14 +84,14 @@ def chat_node(state: "GmailAutomateState") -> Dict:
         namespace=state.nameSpaces,
         include_metadata=True
     )
-
+    state.email_retrieved_docs = results.get("matches", [])
     # 3️⃣ Collect retrieved text
     retrieved_texts = [
         match["metadata"]["text"]
         for match in results.get("matches", [])
         if "metadata" in match and "text" in match["metadata"]
     ]
-
+    state.retrieved_texts = retrieved_texts
     if not retrieved_texts:
         return {"response": "No relevant information found in the knowledge base."}
 
@@ -124,9 +124,6 @@ def chat_node(state: "GmailAutomateState") -> Dict:
     state.email_subject = parsed_output.get("subject", "")
     state.email_body = parsed_output.get("body", "")
 
-    res = mail_node(state)
-    
-    return {
-        "response": parsed_output,
-        "retrieved_docs": retrieved_texts
-    }
+    print("✅ Parsed email components:", parsed_output)
+    res = mail_node(parsed_output)    
+    return state

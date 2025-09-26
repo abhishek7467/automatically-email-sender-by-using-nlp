@@ -12,9 +12,21 @@ class GmailAutomateState(BaseModel):
     query:str
     email_parsed_output: Optional[Dict[str, Any]] = {} 
     email_retrieved_docs: Optional[List[str]] = []
+    retrieved_texts: Optional[List[str]] = []
     sent_email_status: Optional[str] = None
     message_id: Optional[str] = None
     email_to: Optional[List[str]] = Field(default_factory=list)
     email_cc: Optional[List[str]] = Field(default_factory=list)
     email_subject: Optional[str] = None
     email_body: Optional[str] = None
+
+
+
+
+# class EmailState(BaseModel):
+#     email_to: List[str] = []
+#     email_cc: List[str] = []
+#     email_subject: str = ""
+#     email_body: str = ""
+#     sent_email_status: Optional[str] = None
+#     message_id: Optional[str] = None
