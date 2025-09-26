@@ -31,6 +31,12 @@ Before you begin, ensure you have the following:
 - Pinecone account
 - Git installed on your system
 
+
+## Output of the Tool
+<img width="1044" height="540" alt="image" src="https://github.com/user-attachments/assets/766f34ae-7009-4dd3-851b-3ef917b8c485" />
+
+
+
 ## Automation Workflow
 <img width="421" height="684" alt="image" src="https://github.com/user-attachments/assets/541745d8-7e8c-4e0b-a0d1-c8d1ae69b05f" />
 
