@@ -11,7 +11,7 @@ class GmailAutomateState(BaseModel):
     new_index_auto_filled:bool = False
     query:str
     email_parsed_output: Optional[Dict[str, Any]] = {} 
-    email_retrieved_docs: Optional[List[str]] = []
+    email_retrieved_docs: Optional[List[dict]] = []  
     retrieved_texts: Optional[List[str]] = []
     sent_email_status: Optional[str] = None
     message_id: Optional[str] = None

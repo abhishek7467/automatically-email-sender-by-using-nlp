@@ -84,7 +84,8 @@ def chat_node(state: "GmailAutomateState") :
         namespace=state.nameSpaces,
         include_metadata=True
     )
-    state.email_retrieved_docs = results.get("matches", [])
+    retrieved_docs = results.get("matches", [])
+    state.email_retrieved_docs = [vec.to_dict() if hasattr(vec, "to_dict") else dict(vec) for vec in  [vec.to_dict() if hasattr(vec, "to_dict") else dict(vec) for vec in retrieved_docs]]
     # 3️⃣ Collect retrieved text
     retrieved_texts = [
         match["metadata"]["text"]
@@ -122,8 +123,5 @@ def chat_node(state: "GmailAutomateState") :
     state.email_to = parsed_output.get("to", [])
     state.email_cc = parsed_output.get("cc", [])
     state.email_subject = parsed_output.get("subject", "")
-    state.email_body = parsed_output.get("body", "")
-
-    print("✅ Parsed email components:", parsed_output)
-    res = mail_node(parsed_output)    
+    state.email_body = parsed_output.get("body", "")    
     return state

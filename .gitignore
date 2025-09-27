@@ -5,8 +5,6 @@
 ./google_creds/token.json
 ./google_creds/service_account.json
 ./google_creds/gen-lang-client-0288089509-3b9278a23b50.json
-google_creds/
-token_generate.py
 *.json
 Untitled.ipynb
 ./notebook/

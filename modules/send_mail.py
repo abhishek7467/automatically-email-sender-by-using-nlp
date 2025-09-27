@@ -1,10 +1,12 @@
 import base64
 from email.mime.text import MIMEText
+from modules.pydantic_obj import GmailAutomateState
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 import os
 from dotenv import load_dotenv
+import traceback
 
 load_dotenv()
 
@@ -17,6 +19,30 @@ SCOPES = [
 
 GOOGLE_EMAIL_TOKEN = os.getenv("GOOGLE_EMAIL_TOKEN")
 GOOGLE_EMAIL_CREDENTIALS = os.getenv("GOOGLE_EMAIL_CREDENTIALS")
+# def get_gmail_service():
+#     """Authenticate user via OAuth2 and return Gmail service."""
+#     creds = None
+#     if os.path.exists(GOOGLE_EMAIL_TOKEN):
+#         from google.oauth2.credentials import Credentials
+#         creds = Credentials.from_authorized_user_file(GOOGLE_EMAIL_TOKEN, SCOPES)
+
+#     if not creds or not creds.valid:
+#         if creds and creds.expired and creds.refresh_token:
+#             creds.refresh(Request())
+#         else:
+#                 # "google_creds/email_send_client_secret_417557973889-9ts8k5ss5018i85lko8t3c3j9f24th4a.apps.googleusercontent.com.json",
+#             flow = InstalledAppFlow.from_client_secrets_file(
+#                 GOOGLE_EMAIL_CREDENTIALS,
+#                 SCOPES,
+#             )
+#             creds = flow.run_local_server(port=0)
+
+#         # save credentials for reuse
+#         with open(GOOGLE_EMAIL_TOKEN, "w") as token:
+#             token.write(creds.to_json())
+
+#     return build("gmail", "v1", credentials=creds)
+
 def get_gmail_service():
     """Authenticate user via OAuth2 and return Gmail service."""
     creds = None
@@ -41,21 +67,25 @@ def get_gmail_service():
 
     return build("gmail", "v1", credentials=creds)
 import traceback
-def mail_node(dictOutput) -> dict:
+
+
+import traceback
+def mail_node(state: GmailAutomateState) -> GmailAutomateState:
     # parsed_output = state.model_dump()
-    to_list = dictOutput.get("email_to", [])
-    cc_list = dictOutput.get("email_cc", [])
-    subject = dictOutput.get("email_subject", "No Subject")
-    body = dictOutput.get("email_body", "")
+    to_list = state.email_to
+    cc_list = state.email_cc
+    subject = state.email_subject
+    body = state.email_body
 
     if not to_list:
-        return {"status": "error", "message": "No recipients found for email."}
+        state.sent_email_status = "error"
+        return state
 
     try:
         service = get_gmail_service()
         profile = service.users().getProfile(userId="me").execute()
         sender_email = profile.get("emailAddress")
-
+        print("✅ Authenticated as:", sender_email)
         # ✅ Build email properly
         message = MIMEText(body, "html")
         message["to"] = ", ".join(to_list)
@@ -74,17 +104,10 @@ def mail_node(dictOutput) -> dict:
         state.message_id = send_result.get("id")
 
         print(f"✅ Email sent successfully to {to_list}")
-        return {
-            "status": "success",
-            "from": sender_email,
-            "to": to_list,
-            "subject": subject,
-            "message_id": send_result.get("id"),
-        }
+        return state
 
     except Exception as e:
         print(f"❌ Failed to send email: {e}")
         print(traceback.print_exc())
         state.sent_email_status = "error"
-        return {"status": "error", "message": str(e)}
-import traceback
+        return state

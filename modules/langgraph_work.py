@@ -3,6 +3,8 @@ from modules.pydantic_obj import GmailAutomateState
 from modules.create_update_index import select_or_create_index,manage_index_data,embed_and_upsert
 from modules.ai_utils import chat_node
 from modules.utils import load_google_doc_text
+from modules.save_graph import graph_to_png
+from modules.send_mail import mail_node
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -26,6 +28,7 @@ def main_graph():
     graph.add_node("manage_data", manage_index_data)
     graph.add_node("upsert_data", embed_and_upsert)
     graph.add_node("chat_func_index", chat_node)
+    graph.add_node("mail_node", mail_node)
     graph.set_entry_point("router")
 
     # ✅ Use add_conditional_edges instead of condition= on add_edge
@@ -39,7 +42,8 @@ def main_graph():
     )
 
     # Chat Flow
-    graph.add_edge("chat_func_index", END)
+    graph.add_edge("chat_func_index", "mail_node")
+    graph.add_edge("mail_node", END)
 
     # Data Store Flow
     graph.add_edge("load_doc", "select_index")
@@ -47,6 +51,9 @@ def main_graph():
     graph.add_edge("manage_data", "upsert_data")
     graph.add_edge("upsert_data", END)
     app = graph.compile()
+    graph_to_png(app)
+    
+    
     return app
     # result = app.invoke({"option": "chat", "query": "send a email to surender orange for asking about the progress over the ai-hrms system project srtictly with detailed message and in the last also ask for the deployed project link testing?"})
     # print(result)
