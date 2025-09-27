@@ -15,29 +15,6 @@ SCOPES = [
 GOOGLE_EMAIL_TOKEN = os.getenv("GOOGLE_EMAIL_TOKEN")
 GOOGLE_EMAIL_CREDENTIALS = os.getenv("GOOGLE_EMAIL_CREDENTIALS")
 SERVICE_ACCOUNT_FILE = os.getenv("SERVICE_ACCOUNT_FILE")
-# def get_gmail_service():
-#     creds = None
-
-#     # ✅ Load existing token if available
-#     if os.path.exists(GOOGLE_NEW_TOKEN):
-#         with open(GOOGLE_NEW_TOKEN, "rb") as token:
-#             creds = pickle.load(token)
-
-#     # ✅ If no creds or creds are expired, refresh or re-run auth flow
-#     if not creds or not creds.valid:
-#         if creds and creds.expired and creds.refresh_token:
-#             creds.refresh(Request())  # refresh silently
-#         else:
-#             flow = InstalledAppFlow.from_client_secrets_file(
-#                 os.getenv("GOOGLE_EMAIL_CREDENTIALS"),
-#                 SCOPES,
-#             )
-            
-#             creds = flow.run_local_server(port=0)
-#         # ✅ Save the token for next time
-#         with open(GOOGLE_NEW_TOKEN, "wb") as token:
-#             pickle.dump(creds, token)
-#     return build("gmail", "v1", credentials=creds)
 
 
 def get_gmail_service():
