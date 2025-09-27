@@ -33,12 +33,15 @@ Before you begin, ensure you have the following:
 
 
 ## Output of the Tool
-<img width="1044" height="540" alt="image" src="https://github.com/user-attachments/assets/766f34ae-7009-4dd3-851b-3ef917b8c485" />
+<img width="1056" height="387" alt="image" src="https://github.com/user-attachments/assets/29b900e0-4f0d-45eb-ac93-d6c80b5088fe" />
+
+
+<img width="1041" height="353" alt="image" src="https://github.com/user-attachments/assets/f4ce483e-6708-4cc5-a2e4-2caa6de47180" />
 
 
 
 ## Automation Workflow
-<img width="421" height="684" alt="image" src="https://github.com/user-attachments/assets/541745d8-7e8c-4e0b-a0d1-c8d1ae69b05f" />
+<img width="341" height="679" alt="image" src="https://github.com/user-attachments/assets/92930972-238a-435e-8940-f34c80a94f4e" />
 
 
 
